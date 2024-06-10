@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_06_071337) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_10_140652) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -49,6 +49,29 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_06_071337) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "event_users", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "event_id", null: false
+    t.datetime "joined_at", precision: nil, default: -> { "CURRENT_TIMESTAMP" }
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_users_on_event_id"
+    t.index ["user_id", "event_id"], name: "index_event_users_on_user_id_and_event_id", unique: true
+    t.index ["user_id"], name: "index_event_users_on_user_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.text "title"
+    t.integer "created_by", null: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.time "start_time", null: false
+    t.time "end_time", null: false
+    t.date "event_date", null: false
+    t.index ["created_by"], name: "index_events_on_created_by"
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -71,10 +94,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_06_071337) do
     t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "username", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "event_users", "events"
+  add_foreign_key "event_users", "users"
+  add_foreign_key "events", "users", column: "created_by"
 end
