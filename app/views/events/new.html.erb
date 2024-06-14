@@ -1,0 +1,33 @@
+<div class="container">
+  <h2 class="py-2"> Create an Event! </h2>
+  <%= form_with(model: @event, local: true, data: { controller: "flatpickr"}) do |form| %>
+    <% if flash[:post_errors] %>
+      <div class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3 mx-3">
+        <ul>
+          <% flash[:post_errors].each do |error| %>
+            <li><%= error %> <li> 
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <div class="flex flex-col">
+    <%= form.label :title %>
+    <%= form.text_area :body, placeholder: "Write here!" %>
+
+    <%= form.label :description %>
+    <%= form.text_area :description, placeholder: "Description" %>
+
+    <%= form.label :start_time %>
+    <%= form.text_field :start_time, data: { controller:"flatpickr", flatpickr_enable_time: true}%>
+
+    <%= form.label :end_time %>
+    <%= form.text_field :end_time, data: { controller:"flatpickr", flatpickr_enable_time: true}%>
+
+    <%= form.label :event_date %>
+    <%= form.text_field :event_date, data: { controller:"flatpickr", flatpickr_enable_time: true }%>
+      <div class="flex justify-end py-2">
+        <%= form.submit "Save Event", class: "#{button_class(theme: "Secondary")}" %>
+      </div>
+    <% end %>
+  </div>
+</div>
