@@ -6,8 +6,9 @@ Rails.application.routes.draw do
     end
 
   resources :events
-  resources :users
   devise_for :users
+  resources :users
+
 
   
   root to: 'events#index'
