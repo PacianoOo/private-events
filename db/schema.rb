@@ -62,14 +62,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_10_140652) do
 
   create_table "events", force: :cascade do |t|
     t.text "title"
-    t.integer "user_id", null: false
+    t.integer "created_by", null: false
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "start_time", null: false
-    t.datetime "end_time", null: false
-    t.datetime "event_date", null: false
-    t.index ["user_id"], name: "index_events_on_user_id"
+    t.time "start_time", null: false
+    t.time "end_time", null: false
+    t.date "event_date", null: false
+    t.index ["created_by"], name: "index_events_on_created_by"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -103,5 +103,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_10_140652) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "event_users", "events"
   add_foreign_key "event_users", "users"
-  add_foreign_key "events", "users"
+  add_foreign_key "events", "users", column: "created_by"
 end
