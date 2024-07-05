@@ -8,4 +8,5 @@ class Event < ApplicationRecord
   validates :start_time, presence: true
   validates :end_time, presence: true
   validates :event_date, presence: true
+  validates :creator, presence: true
 end

@@ -13,7 +13,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.created_by = current_user.id
     if @event.save
-      redirect_to @event, notice: 'Event was successfully created.'
+      redirect_to root_path, notice: 'Event was successfully created.'
     else
       flash[:post_errors] = @event.errors.full_messages
       render :new

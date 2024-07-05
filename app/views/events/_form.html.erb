@@ -1,7 +1,9 @@
 <div class="container mx-auto px-4 py-6 bg-white rounded-lg shadow-md max-w-lg">
   <h2 class="text-2xl font-semibold mb-4">New Event</h2>
 
-  <%= form_with(model: @event) do |form| %>
+  <%= form_with(model: event, local: true,
+    data: { controller: "flatpickr"
+    }) do |form| %>
     <% if flash[:post_errors] %>
       <div class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3 mx-3">
         <ul>
@@ -22,23 +24,23 @@
       <%= form.text_area :description, placeholder: "Event Description", rows: 3, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
     </div>
 
-    <div class="mb-4">
+    <div class="mb-4 ">
       <%= form.label :start_time, class: "block text-gray-700 text-sm font-bold mb-2" %>
-      <%= form.datetime_field :start_time, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",data: {controller: "flatpickr",flatpickr_enable_time: true} %>
+      <%= form.datetime_field :start_time, class: "start_time shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
     </div>
 
-    <div class="mb-4">
+    <div class="mb-4 ">
       <%= form.label :end_time, class: "block text-gray-700 text-sm font-bold mb-2" %>
-      <%= form.datetime_field :end_time, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",data: {controller: "flatpickr",flatpickr_enable_time: true} %>
+      <%= form.datetime_field :end_time, class: "end_time shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
     </div>
 
-    <div class="mb-4">
+    <div class="mb-4 ">
       <%= form.label :event_date, class: "block text-gray-700 text-sm font-bold mb-2" %>
-      <%= form.datetime_field :event_date, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",data: {controller: "flatpickr"} %>
+      <%= form.datetime_field :event_date, class: "event_date shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
     </div>
 
     <div class="flex justify-end">
-      <%= form.submit "Save Event", class: "#{button_class(theme: 'secondary')}" %>
+      <%= form.submit "Save Event", class: "#{button_class(theme: 'secondary')}", data:{ turbo: "false" } %>
     </div>
-    <% end %>
+  <% end %>
 </div>

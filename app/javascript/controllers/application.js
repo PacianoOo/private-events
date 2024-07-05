@@ -1,6 +1,4 @@
 import { Application } from "@hotwired/stimulus"
-// import Flatpickr
-import Flatpickr from 'stimulus-flatpickr'
 const application = Application.start()
 
 // Configure Stimulus development experience
@@ -11,8 +9,3 @@ export { application }
 
 
 
-// Import style for flatpickr
-require("flatpickr/dist/flatpickr.css")
-
-// Manually register Flatpickr as a stimulus controller
-application.register('flatpickr', Flatpickr)
