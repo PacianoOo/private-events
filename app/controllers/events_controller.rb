@@ -21,6 +21,13 @@ class EventsController < ApplicationController
   end
 
   def destroy
+    @event.destroy
+    if @event.destroy
+      redirect_to root_path, notice: "Event was successfully destroyed"
+    else
+      flash[:post_errors] = @event.errors.full_messages
+      redirect_to root_path
+    end
   end
 
   private

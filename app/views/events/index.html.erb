@@ -11,6 +11,10 @@
         <%= e.start_time.strftime("%B %d, %Y %I:%M %p") %>
         <%= e.end_time.strftime("%B %d, %Y %I:%M %p") %>
         <%= e.event_date.strftime("%B %d, %Y %I:%M %p") %>
+        <% if user_signed_in? && current_user.id == e.created_by %>
+          <%= button_to 'Delete', event_path(e), method: :delete,
+          data: { confirm: 'Are you sure?' }, class: button_class(theme: 'secondary') %>
+        <% end %>
       </div>
     <% end %>
   <div>
