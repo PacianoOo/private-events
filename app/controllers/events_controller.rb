@@ -5,6 +5,10 @@ class EventsController < ApplicationController
     @events = Event.all.order(created_at: :desc)
   end
 
+  def show
+    @event
+  end
+
   def new
     @event = Event.new
   end
@@ -29,7 +33,20 @@ class EventsController < ApplicationController
       redirect_to root_path
     end
   end
+  def edit
+    @event
+  end
 
+  def update
+    respond_to do |format|
+      if @event.update(event_params)
+        format.html { redirect_to root_path }
+        #format.turbo_stream { render turbo_stream: turbo_stream.replace("posts", partial: "views/posts/post", locals: { post: @post }) }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
+    end
+  end
   private
 
   def event_params
