@@ -6,3 +6,18 @@
 	<p class="text-black mb-1">End Time: <%= @event.end_time.strftime("%I:%M %p") %></p>
 	<p class="text-black mb-1">Event Date: <%= @event.event_date.strftime("%B %d, %Y") %></p>
 </div>
+<div class="flex justify-between mt-4 gap-2">
+  <% if user_signed_in? %>
+    <% if @event.users.include?(current_user) %>
+      <%= button_to "Unregister", event_event_user_path(@event, @event.event_users.find_by(user: current_user)), method: :delete, class: button_class(theme: "secondary") %>
+    <% else %>
+      <%= button_to 'Register', event_event_users_path(@event), method: :post, class: button_class(theme: 'primary') %>
+    <% end %>
+  <% end %>
+</div>
+<div class="flex justify-between mt-4 gap-2">
+  <h4>Joined Users</h4>
+  <% @event.users.each do |e| %>
+  <li><%= e.name %></li>
+  <% end %>
+</div>

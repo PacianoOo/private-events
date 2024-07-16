@@ -5,7 +5,9 @@ Rails.application.routes.draw do
       mount Sidekiq::Web => '/sidekiq'
     end
 
-  resources :events
+  resources :events do
+    resources :event_users, only: [:create, :destroy]
+  end
   devise_for :users
 
 
