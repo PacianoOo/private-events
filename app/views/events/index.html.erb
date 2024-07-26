@@ -9,7 +9,7 @@
       <% @events.each do |e| %>
         <div class="flex flex-col bg-slate-300 rounded-md shadow-md h-max p-2 mx-auto">
           <h3 class="text-l font-bold mb-1"><%= e.title %></h3>
-          <p class="text-black mb-1"><%= e.creator.name %></p>
+          <p class="text-black mb-1">Creator: <%= e.creator.name %></p>
           <p class="text-black mb-1">Description: <%= e.description %></p>
           <p class="text-black mb-1">Start Time: <%= e.start_time.strftime("%I:%M %p") %></p>
           <p class="text-black mb-1">End Time: <%= e.end_time.strftime("%I:%M %p") %></p>

@@ -1,6 +1,6 @@
 <div class="container mx-auto px-4 py-6">
 	<h3 class="text-l font-bold mb-1"><%= @event.title %></h3>
-	<p class="text-black mb-1"><%= @event.creator.name %></p>
+	<p class="text-black mb-1">Creator: <%= @event.creator.name %></p>
 	<p class="text-black mb-1">Description: <%= @event.description %></p>
 	<p class="text-black mb-1">Start Time: <%= @event.start_time.strftime("%I:%M %p") %></p>
 	<p class="text-black mb-1">End Time: <%= @event.end_time.strftime("%I:%M %p") %></p>
@@ -15,9 +15,11 @@
     <% end %>
   <% end %>
 </div>
-<div class="flex justify-between mt-4 gap-2">
+<div class="container mx-auto px-4 py-6">
   <h4>Joined Users</h4>
+  <ul>
   <% @event.users.each do |e| %>
   <li><%= e.name %></li>
   <% end %>
+  </ul>
 </div>
