@@ -1,0 +1,22 @@
+<div class="container mx-auto px-4 py-6">
+  <div class="grid grid-cols-4 gap-4">
+    <% events.each do |e| %>
+    <div class="flex flex-col bg-slate-300 rounded-md shadow-md h-max p-2 mx-auto">
+      <h3 class="text-l font-bold mb-1"><%= e.title %></h3>
+      <p class="text-black mb-1">Creator: <%= e.creator.name %></p>
+      <p class="text-black mb-1">Description: <%= e.description %></p>
+      <p class="text-black mb-1">Start Time: <%= e.start_time.strftime("%I:%M %p") %></p>
+      <p class="text-black mb-1">End Time: <%= e.end_time.strftime("%I:%M %p") %></p>
+      <p class="text-black mb-1">Event Date: <%= e.event_date.strftime("%B %d, %Y") %></p>
+      <%= link_to 'Show',event_path(e), class: "#{button_class(theme: 'secondary')}" %>
+      <% if user_signed_in? && current_user.id == e.created_by %>
+      <div class="flex justify-between mt-4 gap-2">
+          <%= button_to 'Delete', event_path(e), method: :delete,
+          data: { confirm: 'Are you sure?' }, class: "#{button_class(theme: 'secondary')} mr-2" %>
+          <%= link_to 'Edit', edit_event_path(e), class: "#{button_class(theme: 'secondary')}" %>
+      </div>
+      <% end %>
+    </div>
+    <% end %>
+  <div>
+</div>
