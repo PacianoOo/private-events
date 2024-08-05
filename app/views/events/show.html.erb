@@ -15,11 +15,11 @@
     <% end %>
   <% end %>
 </div>
-<div class="container mx-auto px-4 py-6">
+<div class="flex flex-col container mx-auto px-4 py-6">
   <h4>Joined Users</h4>
   <ul>
   <% @event.users.each do |e| %>
-  <li><%= e.name %></li>
+  <li class="flex items-center space-x-4"><%= profile_image(@event.creator, size: "small")%> <span><%= e.name%> </span> </li>
   <% end %>
   </ul>
 </div>

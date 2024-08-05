@@ -77,12 +77,12 @@ module ApplicationHelper
     when "large"
       "w-18 h-18"
     when "medium"
-      "w-14 h-14"
+      "w-[200px] h-[300px]"
     else
-      "w-10 h-10"
+      "w-[50px] h-[50px]"
     end
 
-    classes = "#{size} flex-skrink-0 rounded-full
+    classes = "#{size} flex-skrink-0 rounded-lg
     border-2 border-white"
 
     if user.profile_image.attached?
